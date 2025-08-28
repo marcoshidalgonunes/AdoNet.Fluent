@@ -24,7 +24,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Class constructor.
     ///</summary>
     /// <param name="connectionString">Database connection string.</param>
-    /// <param name="mode">Connection mode (normal, with transactios or using MARS).</param>
+    /// <param name="mode"><see cref="ConnectionMode"/> (normal, with transactios or using MARS).</param>
     protected DataObject(string connectionString, ConnectionMode mode)
     {
         _connectionMode = mode;
@@ -41,7 +41,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, bool value, ParameterDirection direction);
 
     /// <summary>
@@ -50,8 +50,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     protected abstract void AddInOutParameter(string parameterName, byte precision, byte scale, ParameterDirection direction);
 
     /// <summary>
@@ -59,15 +59,15 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, byte? value, ParameterDirection direction);
 
     /// <summary>
-    /// Creates input/output parameter of <see cref="System.DateTime"/> type for database statement.
+    /// Creates input/output parameter of <see cref="DateTime"/> type for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, DateTime? value, ParameterDirection direction);
 
     /// <summary>
@@ -75,9 +75,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="scale">Parameter scale.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, decimal? value, byte precision, byte scale, ParameterDirection direction);
 
     /// <summary>
@@ -85,7 +85,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, double? value, ParameterDirection direction);
 
     /// <summary>
@@ -93,7 +93,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, short? value, ParameterDirection direction);
 
     /// <summary>
@@ -101,7 +101,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, int? value, ParameterDirection direction);
 
     /// <summary>
@@ -109,17 +109,25 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, long? value, ParameterDirection direction);
 
     /// <summary>
-    /// Creates input/output parameter of <see cref="AdoNet.Fluent.NumericType"> type for database statement.
+    /// Creates input/output parameter of single type for database statement.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <param name="value">Parameter value.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
+    protected abstract void AddInOutParameter(string parameterName, float? value, ParameterDirection direction);
+
+    /// <summary>
+    /// Creates input/output parameter of <see cref="NumericType"> type for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="type">Parameter type.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
     protected void AddInOutParameter(string parameterName, NumericType type, ParameterDirection direction)
     {
         CheckParameter(parameterName);
@@ -127,22 +135,14 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Creates input/output parameter of single type for database statement.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <param name="value">Parameter value.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
-    protected abstract void AddInOutParameter(string parameterName, float? value, ParameterDirection direction);
-
-    /// <summary>
     /// Creates input/output parameter of string type for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     protected void AddInOutParameter(string parameterName, int size, bool variable, ParameterDirection direction)
     {
         CheckParameter(parameterName);
@@ -156,7 +156,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="value">Parameter value.</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     protected abstract void AddInOutParameter(string parameterName, string? value, int size, bool variable, ParameterDirection direction);
 
     /// <summary>
@@ -167,7 +167,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Checks if command is valid.
     /// </summary>
-    /// <exception cref="System.InvalidOperationException" />
+    /// <exception cref="InvalidOperationException" />
     protected void CheckCommand()
     {
         if (string.IsNullOrEmpty(Command.CommandText))
@@ -185,7 +185,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Checks if parameter is valid.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     protected void CheckParameter(string parameterName)
     {
         if (string.IsNullOrEmpty(parameterName))
@@ -200,8 +200,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     protected void CheckParameter(string parameterName, byte precision, byte scale)
     {
         CheckParameter(parameterName);
@@ -220,8 +220,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     protected void CheckParameter(string parameterName, int size)
     {
         CheckParameter(parameterName);
@@ -256,32 +256,32 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     protected TConnection Connection { get; set; }
 
     /// <summary>
-    /// Cria parâmetro numérico.
+    /// Creates numeric parameter.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
-    /// <param name="type"><see cref="AdoNet.Fluent.NumericType"/> parameter.</param>
-    /// /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
-    /// <returns>Parameter instance numérico</returns>
+    /// <param name="type"><see cref="NumericType"/> parameter.</param>
+    /// /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
+    /// <returns>Numeric parameter instance</returns>
     protected abstract TParameter CreateParameter(string parameterName, NumericType type, ParameterDirection direction);
 
     /// <summary>
-    /// Creates parameter of type decimal.
+    /// Creates parameter of decimal type.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
-    /// /// <param name="direction">Parameter <seealso cref="System.Data.ParameterDirection">direction</seealso>.</param>
+    /// /// <param name="direction">Parameter <seealso cref="ParameterDirection">direction</seealso>.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <returns>Parameter instance of type decimal.</returns>
+    /// <returns>Parameter instance of decimal type.</returns>
     protected abstract TParameter CreateParameter(string parameterName, ParameterDirection direction, byte precision, byte scale);
 
     /// <summary>
-    /// Creates parameter of type string.
+    /// Creates parameter of string type.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="direction">Parameter direction ("input", "output" ou "inputoutput").</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <returns>Parameter instance of type string.</returns>
+    /// <returns>Parameter instance of string type.</returns>
     protected abstract TParameter CreateParameter(string parameterName, ParameterDirection direction, int size, bool variable);
 
     /// <summary>
@@ -361,7 +361,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     protected int ForeignKeyError { get; set; }
 
     /// <summary>
-    /// Returns parameter from <see cref="System.Data.IDbCommand.Parameters"/> collection.
+    /// Returns parameter from <see cref="IDbCommand.Parameters"/> collection.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <returns>Parameter instance.</returns>
@@ -390,7 +390,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="errorCode">Error code returned by database.</param>
     /// <param name="ex">Exception thrown in database command execution.</param>
-    /// <exception cref="System.Data.ConstraintException" />
+    /// <exception cref="ConstraintException" />
     protected void HandleException(int errorCode, TException ex)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -412,7 +412,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Opens connection with database.
     /// </summary>
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="DbException" />
     protected virtual void OpenConnection()
     {
         Connection ??= new TConnection();
@@ -425,6 +425,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Asynchronously opens connection with database.
     /// </summary>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <exception cref="DbException" />
     protected virtual async Task OpenConnectionAsync(CancellationToken cancellationToken)
     {
         Connection ??= new TConnection();
@@ -443,8 +445,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Set command to be executed in database.
     /// </summary>
     /// <param name="cmdText">Instruction to execute in database.</param>
-    /// <param name="type"><see cref="System.Data.CommandType"/>.</param>
-    /// <exception cref="System.NotSupportedException" />
+    /// <param name="type"><see cref="CommandType"/>.</param>
+    /// <exception cref="NotSupportedException" />
     /// <remarks>If the command is of type text and has no parameters, an exception will be thrown when trying to execute it.</remarks>
     protected void SetCommand(string cmdText, CommandType type)
     {
@@ -465,14 +467,14 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
 
     #endregion
 
-    #region IDatabase Members
+    #region IDataObject Members
 
     /// <summary>
     /// Creates input/output parameter of boolean type for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, bool value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -485,8 +487,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, byte precision, byte scale)
     {
         AddInOutParameter(parameterName, precision, scale, ParameterDirection.InputOutput);
@@ -498,7 +500,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, byte? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -506,11 +508,11 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Creates input/output parameter of <see cref="System.DateTime"/> type for database statement.
+    /// Creates input/output parameter of <see cref="DateTime"/> type for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, DateTime? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -524,7 +526,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="value">Parameter value.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, decimal? value, byte precision, byte scale)
     {
         AddInOutParameter(parameterName, value, precision, scale, ParameterDirection.InputOutput);
@@ -536,7 +538,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, double? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -548,7 +550,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, short? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -560,7 +562,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, int? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -573,8 +575,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, int size, bool variable)
     {
         AddInOutParameter(parameterName, size, variable, ParameterDirection.InputOutput);
@@ -586,7 +588,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, long? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -598,7 +600,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="type">Parameter type.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public IDataObject AddInOutParameter(string parameterName, NumericType type)
     {
         AddInOutParameter(parameterName, type, ParameterDirection.InputOutput);
@@ -610,7 +612,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInOutParameter(string parameterName, float? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.InputOutput);
@@ -623,8 +625,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
     /// <param name="size">Maximum size of string.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddInOutParameter(string parameterName, string? value, int size)
     {
         AddInOutParameter(parameterName, value, size, (size > _fixedSize));
@@ -645,7 +647,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <remarks>For use in creating XML type parameter.</remarks>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual IDataObject AddInParameter(string parameterName)
     {
         throw new NotSupportedException();
@@ -656,7 +658,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, bool value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -669,9 +671,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddInParameter(string parameterName, byte precision, byte scale)
     {
         CheckParameter(parameterName, precision, scale);
@@ -684,7 +686,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, byte? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -699,11 +701,11 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     public abstract IDataObject AddInParameter(string parameterName, byte[] value);
 
     /// <summary>
-    /// Creates input parameter of <see cref="System.DateTime"/> for database statement.
+    /// Creates input parameter of <see cref="DateTime"/> for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, DateTime? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -717,7 +719,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="value">Parameter value.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, decimal? value, byte precision, byte scale)
     {
         AddInOutParameter(parameterName, value, precision, scale, ParameterDirection.Input);
@@ -729,7 +731,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, double? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -741,7 +743,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, short? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -754,9 +756,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddInParameter(string parameterName, int size, bool variable)
     {
         AddInOutParameter(parameterName, size, variable, ParameterDirection.Input);
@@ -768,7 +770,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, int? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -780,7 +782,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, long? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -792,8 +794,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="type">Parameter type.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, NumericType type)
     {
         CheckParameter(parameterName);
@@ -806,7 +808,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddInParameter(string parameterName, float? value)
     {
         AddInOutParameter(parameterName, value, ParameterDirection.Input);
@@ -818,7 +820,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="parameterTypeName">Database user-defined type.</param>
-    /// <param name="dt">"<see cref="System.Data.DataTable"/> with data collection.</param>
+    /// <param name="dt">"<see cref="DataTable"/> with data collection.</param>
     public abstract IDataObject AddInParameter(string parameterName, string parameterTypeName, DataTable dt);
 
     /// <summary>
@@ -827,8 +829,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
     /// <param name="size">Maximum size of string.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddInParameter(string parameterName, string? value, int size)
     {
         AddInOutParameter(parameterName, value, size, (size > _fixedSize), ParameterDirection.Input);
@@ -849,7 +851,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">XmlReader with XML content to be used as parameter value.</param>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual IDataObject AddInParameter(string parameterName, XmlReader value)
     {
         throw new NotSupportedException();
@@ -861,8 +863,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="scale">Parameter scale.</param>
     /// <param name="precision">Parameter precision.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddOutParameter(string parameterName, byte precision, byte scale)
     {
         CheckParameter(parameterName, precision, scale);
@@ -875,8 +877,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddOutParameter(string parameterName, int size)
     {
         AddOutParameter(parameterName, size, (size > _fixedSize));
@@ -889,8 +891,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="size">Maximum size of string.</param>
     /// <param name="variable">Flag for variable size.</param>
-    /// <exception cref="System.ArgumentNullException" />
-    /// <exception cref="System.ArgumentOutOfRangeException" />
+    /// <exception cref="ArgumentNullException" />
+    /// <exception cref="ArgumentOutOfRangeException" />
     public IDataObject AddOutParameter(string parameterName, int size, bool variable)
     {
         CheckParameter(parameterName, size);
@@ -906,7 +908,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="type">Parameter type.</param>
-    /// <exception cref="System.ArgumentNullException" />
+    /// <exception cref="ArgumentNullException" />
     public IDataObject AddOutParameter(string parameterName, NumericType type)
     {
         CheckParameter(parameterName);
@@ -919,7 +921,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Creates output parameter of XML for database statement.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual IDataObject AddOutParameter(string parameterName)
     {
         throw new NotSupportedException();
@@ -928,7 +930,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Creates return parameter for database statement.
     /// </summary>
-    /// <exception cref="System.InvalidOperationException" />
+    /// <exception cref="InvalidOperationException" />
     public IDataObject AddReturnParameter()
     {
         if (Command.Parameters.Count > 0)
@@ -953,9 +955,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Performs operation to modify rows in database table.
     /// </summary>
     /// <returns>Number of rows affected.</returns>
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.ConstraintException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="ConstraintException" />
+    /// <exception cref="DbException" />
     public int Execute()
     {
         CheckCommand();
@@ -1031,55 +1033,6 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     public abstract bool GetBoolean(string parameterName);
 
     /// <summary>
-    /// Returns output parameter value of byte type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract byte GetByte(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of type <see cref="System.DateTime"/>.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract DateTime GetDateTime(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of decimal type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract decimal GetDecimal(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of double type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract double GetDouble(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of short type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract short GetInt16(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of int type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract int GetInt32(string parameterName);
-
-    /// <summary>
-    /// Returns output parameter value of long type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract long GetInt64(string parameterName);
-
-    /// <summary>
     /// Returns output parameter value of boolean type.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
@@ -1091,14 +1044,35 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <returns>Output parameter value.</returns>
+    public abstract byte GetByte(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of byte type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
     public abstract byte? GetByteOrNull(string parameterName);
 
     /// <summary>
-    /// Returns output parameter value of type <see cref="System.DateTime"/>.
+    /// Returns output parameter value of type <see cref="DateTime"/>.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
+    public abstract DateTime GetDateTime(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of type <see cref="DateTime"/>.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <returns>Output parameter value.</returns>
     public abstract DateTime? GetDateTimeOrNull(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of decimal type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
+    public abstract decimal GetDecimal(string parameterName);
 
     /// <summary>
     /// Returns output parameter value of decimal type.
@@ -1112,7 +1086,21 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <returns>Output parameter value.</returns>
+    public abstract double GetDouble(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of double type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
     public abstract double? GetDoubleOrNull(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of short type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
+    public abstract short GetInt16(string parameterName);
 
     /// <summary>
     /// Returns output parameter value of short type.
@@ -1126,7 +1114,21 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <returns>Output parameter value.</returns>
+    public abstract int GetInt32(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of int type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
     public abstract int? GetInt32OrNull(string parameterName);
+
+    /// <summary>
+    /// Returns output parameter value of long type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
+    public abstract long GetInt64(string parameterName);
 
     /// <summary>
     /// Returns output parameter value of long type.
@@ -1152,6 +1154,13 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     public abstract float GetSingle(string parameterName);
 
     /// <summary>
+    /// Returns output parameter value of single type.
+    /// </summary>
+    /// <param name="parameterName">Parameter name.</param>
+    /// <returns>Output parameter value.</returns>
+    public abstract float? GetSingleOrNull(string parameterName);
+
+    /// <summary>
     /// Returns output parameter value of string type.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
@@ -1169,14 +1178,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Returns output parameter value of single type.
-    /// </summary>
-    /// <param name="parameterName">Parameter name.</param>
-    /// <returns>Output parameter value.</returns>
-    public abstract float? GetSingleOrNull(string parameterName);
-
-    /// <summary>
-    /// <see cref="AdoNet.Fluent.ConnectionMode"/>
+    /// <see cref="ConnectionMode"/>
     /// </summary>
     public ConnectionMode Mode
     {
@@ -1191,7 +1193,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Prepares database statement for repeated execution.
     /// </summary>
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="DbException" />
     public void Prepare()
     {
         OpenConnection();
@@ -1201,7 +1203,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// <summary>
     /// Prepares asynchronously database statement for repeated execution.
     /// </summary>
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="DbException" />
     public async Task PrepareAsync()
     {
         await PrepareAsync(CancellationToken.None);
@@ -1211,7 +1213,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Prepares asynchronously database statement for repeated execution.
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// </summary>
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="DbException" />
     public async Task PrepareAsync(CancellationToken token)
     {
         await OpenConnectionAsync(token);
@@ -1223,17 +1225,11 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="setter">Delegate to set order of columns in query result.</param>
     /// <param name="filler">Delegate to fill data obtained in query.</param>
-    public void Read(SetOrdinal setter, Fill filler)
-    {
-        Read(setter, filler, CommandBehavior.Default);
-    }
-
-    /// <summary>
-    /// Executes statement to query rows in database table.
-    /// </summary>
-    /// <param name="setter">Delegate to set order of columns in query result.</param>
-    /// <param name="filler">Delegate to fill data obtained in query.</param>
-    /// <param name="behavior"><see cref="System.Data.CommandBehavior"/> of query.</param>
+    /// <param name="behavior"><see cref="CommandBehavior"/> of query.</param>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="InvalidOperationException"/>
+    /// <exception cref="DbException"/>
+    /// <exception cref="ConstraintException"/>
     public virtual void Read(SetOrdinal setter, Fill filler, CommandBehavior behavior)
     {
         ArgumentNullException.ThrowIfNull(setter);
@@ -1265,15 +1261,17 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Executes asynchronously statement to query rows in database table.
+    /// Executes statement to query rows in database table.
     /// </summary>
     /// <param name="setter">Delegate to set order of columns in query result.</param>
     /// <param name="filler">Delegate to fill data obtained in query.</param>
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
-    public async Task ReadAsync(SetOrdinal setter, Fill filler)
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="InvalidOperationException"/>
+    /// <exception cref="DbException"/>
+    /// <exception cref="ConstraintException"/>
+    public void Read(SetOrdinal setter, Fill filler)
     {
-        await ReadAsync(setter, filler, CommandBehavior.Default, CancellationToken.None);
+        Read(setter, filler, CommandBehavior.Default);
     }
 
     /// <summary>
@@ -1281,9 +1279,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="setter">Delegate to set order of columns in query result.</param>
     /// <param name="filler">Delegate to fill data obtained in query.</param>
-    /// <param name="cancellationToken">Cancellation token for request.</param>    /// 
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> for request.</param>    /// 
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task ReadAsync(SetOrdinal setter, Fill filler, CancellationToken cancellationToken)
     {
         await ReadAsync(setter, filler, CommandBehavior.Default, cancellationToken);
@@ -1294,7 +1292,11 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="setter">Delegate to set order of columns in query result.</param>
     /// <param name="filler">Delegate to fill data obtained in query.</param>
-    /// <param name="cancellationToken">Cancellation token for request.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/> for request. for request.</param>
+    /// <exception cref="ArgumentException"/>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="InvalidOperationException"/>
+    /// <exception cref="DbException"/>
     public virtual async Task ReadAsync(SetOrdinal setter, Fill filler, CommandBehavior behavior, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(setter);
@@ -1330,7 +1332,25 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="setter">Delegate to set order of columns in query result.</param>
     /// <param name="filler">Delegate to fill data obtained in query.</param>
+    /// <exception cref="ArgumentException"/>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="InvalidOperationException"/>
+    /// <exception cref="DbException"/>
+    public async Task ReadAsync(SetOrdinal setter, Fill filler)
+    {
+        await ReadAsync(setter, filler, CommandBehavior.Default, CancellationToken.None);
+    }
+
+    /// <summary>
+    /// Executes asynchronously statement to query rows in database table.
+    /// </summary>
+    /// <param name="setter">Delegate to set order of columns in query result.</param>
+    /// <param name="filler">Delegate to fill data obtained in query.</param>
     /// <param name="cancellationToken">Cancellation token for request.</param>
+    /// <exception cref="ArgumentException"/>
+    /// <exception cref="ArgumentNullException"/>
+    /// <exception cref="InvalidOperationException"/>
+    /// <exception cref="DbException"/>
     public async Task ReadAsync(SetOrdinal setter, Fill filler, CommandBehavior behavior)
     {
         await ReadAsync(setter, filler, behavior, CancellationToken.None);
@@ -1340,6 +1360,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value in binary format.
     /// </summary>
     /// <returns>Scalar query value.</returns>
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public byte[]? ScalarBinary()
     {
         return ExecuteScalar() as byte[];
@@ -1349,6 +1371,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value in binary format.
     /// </summary>
     /// <returns>Scalar query value.</returns>
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<byte[]?> ScalarBinaryAsync()
     {
         return await ExecuteScalarAsync(CancellationToken.None) as byte[];
@@ -1359,6 +1383,8 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<byte[]?> ScalarBinaryAsync(CancellationToken token)
     {
         return await ExecuteScalarAsync(token) as byte[];
@@ -1368,18 +1394,18 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of boolean type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public bool? ScalarBoolean() => Parameter<bool>.GetScalar(ExecuteScalar()!);
 
     /// <summary>
     /// Executes asynchronously database statement for scalar query that returns value of boolean type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
 #pragma warning disable CS8604 // Possible null reference argument.
     public async Task<bool?> ScalarBooleanAsync() => Parameter<bool>.GetScalar(await ExecuteScalarAsync(CancellationToken.None));
 #pragma warning restore CS8604 // Possible null reference argument.
@@ -1389,9 +1415,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<bool?> ScalarBooleanAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1403,9 +1429,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of byte type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public byte? ScalarByte()
     {
         return Parameter<byte>.GetScalar(ExecuteScalar()!);
@@ -1415,9 +1441,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of byte type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<byte?> ScalarByteAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1430,9 +1456,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<byte?> ScalarByteAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1441,24 +1467,24 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Executes database statement for scalar query that returns value of <see cref="System.DateTime"/>.
+    /// Executes database statement for scalar query that returns value of <see cref="DateTime"/>.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public DateTime? ScalarDateTime()
     {
         return Parameter<DateTime>.GetScalar(ExecuteScalar()!);
     }
 
     /// <summary>
-    /// Executes asynchronously database statement for scalar query that returns value of <see cref="System.DateTime"/>.
+    /// Executes asynchronously database statement for scalar query that returns value of <see cref="DateTime"/>.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<DateTime?> ScalarDateTimeAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1467,13 +1493,13 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     }
 
     /// <summary>
-    /// Executes asynchronously database statement for scalar query that returns value of <see cref="System.DateTime"/>.
+    /// Executes asynchronously database statement for scalar query that returns value of <see cref="DateTime"/>.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<DateTime?> ScalarDateTimeAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1485,9 +1511,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of decimal type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public decimal? ScalarDecimal()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1499,9 +1525,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of decimal type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<decimal?> ScalarDecimalAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1514,9 +1540,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<decimal?> ScalarDecimalAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1528,9 +1554,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of double type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public double? ScalarDouble()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1542,9 +1568,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of double type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<double?> ScalarDoubleAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1557,9 +1583,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<double?> ScalarDoubleAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1571,9 +1597,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of short type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public short? ScalarInt16()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1585,9 +1611,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of short type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<short?> ScalarInt16Async()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1600,9 +1626,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<short?> ScalarInt16Async(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1614,9 +1640,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of int type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public int? ScalarInt32()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1628,9 +1654,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of int type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<int?> ScalarInt32Async()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1643,9 +1669,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<int?> ScalarInt32Async(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1657,9 +1683,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of long type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public long? ScalarInt64()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1671,9 +1697,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of long type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<long?> ScalarInt64Async()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1686,9 +1712,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<long?> ScalarInt64Async(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1700,9 +1726,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of single type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public float? ScalarSingle()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1714,9 +1740,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of single type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<float?> ScalarSingleAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1729,9 +1755,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<float?> ScalarSingleAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1743,9 +1769,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns value of string type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public string? ScalarString()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1757,9 +1783,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns value of string type.
     /// </summary>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<string?> ScalarStringAsync()
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1772,9 +1798,9 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for request.</param>
     /// <returns>Scalar query value.</returns>
-    /// <exception cref="System.InvalidCastException" />
-    /// <exception cref="System.InvalidOperationException" />
-    /// <exception cref="System.Data.Common.DbException" />
+    /// <exception cref="InvalidCastException" />
+    /// <exception cref="InvalidOperationException" />
+    /// <exception cref="DbException" />
     public async Task<string?> ScalarStringAsync(CancellationToken token)
     {
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -1786,7 +1812,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes database statement for scalar query that returns XML.
     /// </summary>
     /// <param name="filler">Delegate to fill data in XML format retrieved in query.</param>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual void ScalarXml(FillXml filler)
     {
         throw new NotSupportedException();
@@ -1796,19 +1822,18 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// Executes asynchronously database statement for scalar query that returns XML.
     /// </summary>
     /// <param name="filler">Delegate to fill data in XML format retrieved in query.</param>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual Task ScalarXmlAsync(FillXmlAsync filler)
     {
         throw new NotSupportedException();
     }
 
     /// <summary>
-    /// Executa instrução assíncrona para consulta escalar em banco de dados que retorna valor XML.
+    /// Executes asynchronously database statement for scalar query that returns XML.
     /// </summary>
     /// <param name="filler">Delegate to fill data in XML format retrieved in query.</param>
     /// <param name="cancellationToken">Cancellation token for request.</param>
-    /// <returns>XmlReader com o conteúdo da consulta escalar.</returns>
-    /// <exception cref="System.NotSupportedException" />
+    /// <exception cref="NotSupportedException" />
     public virtual Task ScalarXmlAsync(FillXmlAsync filler, CancellationToken cancellationToken)
     {
         throw new NotSupportedException();
@@ -1819,7 +1844,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, bool? value);
 
     /// <summary>
@@ -1827,15 +1852,15 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, byte? value);
 
     /// <summary>
-    /// Set value for parameter of <see cref="System.DateTime"/>.
+    /// Set value for parameter of <see cref="DateTime"/>.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, DateTime? value);
 
     /// <summary>
@@ -1843,7 +1868,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, decimal? value);
 
     /// <summary>
@@ -1851,7 +1876,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, double? value);
 
     /// <summary>
@@ -1859,7 +1884,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, short? value);
 
     /// <summary>
@@ -1867,7 +1892,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, int? value);
 
     /// <summary>
@@ -1875,7 +1900,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, long? value);
 
     /// <summary>
@@ -1883,7 +1908,7 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, float? value);
 
     /// <summary>
@@ -1891,16 +1916,16 @@ public abstract class DataObject<TConnection, TCommand, TParameter, TException> 
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
     /// <param name="value">Parameter value.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
     public abstract IDataObject SetParameter(string parameterName, string? value);
 
     /// <summary>
     /// Set value for XML parameter.
     /// </summary>
     /// <param name="parameterName">Parameter name.</param>
-    /// <param name="value">XmlReader with parameter value content.</param>
-    /// <remarks>For <seealso cref="System.Data.IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
-    /// <exception cref="System.NotSupportedException" />
+    /// <param name="value"><see cref="XmlReader"/> with parameter value content.</param>
+    /// <remarks>For <seealso cref="IDbCommand.Prepare">prepared</seealso> instructions.</remarks>
+    /// <exception cref="NotSupportedException" />
     public virtual IDataObject SetParameter(string parameterName, XmlReader value)
     {
         throw new NotSupportedException();

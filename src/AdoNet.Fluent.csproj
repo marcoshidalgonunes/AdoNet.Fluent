@@ -4,9 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <Version>0.9.0</Version>
-    <FileVersion>0.9.0.0</FileVersion>
-    <AssemblyVersion>0.9.0.0</AssemblyVersion>
+    <Version>0.9.1</Version>
+    <FileVersion>0.9.1.0</FileVersion>
+    <AssemblyVersion>0.9.1.0</AssemblyVersion>
     <Description>This library offers another abstraction layer to Ado.Net, as LINQ does. It is aimed to deliver a higher performance than Entity Framework because combines the ease of fluent notation with direct call to ADO,NET classes.
 
 As pure ADO.NET, the AdoNet.Fluent implementation demands a knowledge of database to be used, including SQL commands. The benefit is a code easier to be developed, suitable to be used with AI helpers such as GitHub Copilot, in order to achieve a godd development productivity along with better performance.
