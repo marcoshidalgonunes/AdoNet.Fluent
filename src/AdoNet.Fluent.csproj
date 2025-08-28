@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>0.9.0</Version>
+    <FileVersion>0.9.0.0</FileVersion>
+    <AssemblyVersion>0.9.0.0</AssemblyVersion>
+    <Description>This library offers another abstraction layer to Ado.Net, as LINQ does. It is aimed to deliver a higher performance than Entity Framework because combines the ease of fluent notation with direct call to ADO,NET classes.
+
+As pure ADO.NET, the AdoNet.Fluent implementation demands a knowledge of database to be used, including SQL commands. The benefit is a code easier to be developed, suitable to be used with AI helpers such as GitHub Copilot, in order to achieve a godd development productivity along with better performance.
+
+AdoNet.Fluent fits in development of containerized microservices that use relational databases and requires high throughput.</Description>
+    <Title>AdoNet.Fluent</Title>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+	<Authors>Marcos Hidalgo Nunes</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\Messages.en.Designer.cs" />
+    <Compile Remove="Resources\Messages.pt.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.8" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.pt.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.pt.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages.pt.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.pt.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages.en.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.en.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
