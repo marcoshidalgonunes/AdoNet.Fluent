@@ -22,7 +22,7 @@ AdoNet.Fluent fits in development of containerized microservices that use relati
 - **IDataObjectBuilder**  
   Interface that specifies the contract for `DataObject` builders, supporting fluent configuration and mapping.
 
-- **ITransaction**
+- **ITrnsaction**  
   Interface that specifies the contract of `DataObject` builders for [transaction](https://en.wikipedia.org/wiki/Database_transaction) operations, supporting fluent configuration and mapping.
 
 ## Getting Started
